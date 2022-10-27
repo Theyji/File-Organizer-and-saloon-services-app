@@ -29,6 +29,21 @@ namespace Lab3A
             return this.Artist;
         }
 
+        public string getTitle()
+        {
+            return getTitle();
+        }
+
+        public string getYear()
+        {
+            return getYear();
+        }
+
+        public override string ToString()
+        {
+            return $"Book Title: {getTitle() + '\n'}  Year: {getYear() + '\n'} Album: {getAlbum() + '\n'} Artist: {getArtist() + '\n'}";
+        }
+
     }
 
 

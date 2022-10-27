@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Lab3A
 {
@@ -19,14 +21,49 @@ namespace Lab3A
 
         public string Decrypt()
         {
-            throw new NotImplementedException();
+            StringBuilder result = new StringBuilder();
+            Regex regex = new Regex("[A-Za-z]");
+            foreach (char c in getsummary())
+            {
+                if (regex.IsMatch(c.ToString()))
+                {
+                    int code = ((c & 223) - 52) % 26 + (c & 32) + 65;
+                    result.Append((char)code);
+                }
+                else
+                    result.Append(c);
+            }
+            this.summary = result.ToString();
+            return summary;
         }
 
         public string Encrypt()
         {
-            throw new NotImplementedException();
+            StringBuilder result = new StringBuilder();
+            Regex regex = new Regex("[A-Za-z]");
+            foreach (char c in getsummary())
+            {
+                if (regex.IsMatch(c.ToString()))
+                {
+                    int code = ((c & 223) - 52) % 26 + (c & 32) + 65;
+                    result.Append((char)code);
+                }
+                else
+                    result.Append(c);
+            }
+            this.summary = result.ToString();
+            return summary;
         }
 
+        public string getTitle()
+        {
+            return getTitle();
+        }
+
+        public int getYear()
+        {
+            return getYear();
+        }
         public string getAuthor()
         {
             return this.Author;
@@ -35,6 +72,13 @@ namespace Lab3A
         public string getsummary()
         {
             return this.summary;
+        }
+
+       
+
+        public override string ToString()
+        {
+            return $"Book Title: {getTitle() + '\n'}  Year: {getYear() + '\n'} Author: {getAuthor() +'\n'}";
         }
 
 
