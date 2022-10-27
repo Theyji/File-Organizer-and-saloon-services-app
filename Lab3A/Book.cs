@@ -33,8 +33,8 @@ namespace Lab3A
                 else
                     result.Append(c);
             }
-            this.summary = result.ToString();
-            return summary;
+            return result.ToString();
+            
         }
 
         public string Encrypt()
@@ -51,19 +51,11 @@ namespace Lab3A
                 else
                     result.Append(c);
             }
-            this.summary = result.ToString();
-            return summary;
+            return result.ToString();
+          
         }
 
-        public string getTitle()
-        {
-            return getTitle();
-        }
-
-        public int getYear()
-        {
-            return getYear();
-        }
+       
         public string getAuthor()
         {
             return this.Author;
@@ -78,7 +70,7 @@ namespace Lab3A
 
         public override string ToString()
         {
-            return $"Book Title: {getTitle() + '\n'}  Year: {getYear() + '\n'} Author: {getAuthor() +'\n'}";
+            return $"Book Title: {base.Title + '\n'}  Year: {base.Year + '\n'} Author: {getAuthor() +'\n'}";
         }
 
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,7 +19,7 @@ namespace Lab3A
         static List<Book> books = new List<Book>();
         static List<Movie> movies = new List<Movie>();
         static List<Songs> songs = new List<Songs>();
-        static List<string> summary = new List<string>();
+       
 
 
         static void Main(string[] args)
@@ -26,58 +28,49 @@ namespace Lab3A
 
             readData();
 
-           listBooks();
-
-           
-
-     
-
-
+           listSongs();
 
          
         }
 
         public static void readData()
         {
-            try
+            StreamReader mediaReader = new StreamReader(MEDIADATA);
+
+            while (!mediaReader.EndOfStream)
             {
-                StreamReader mediaReader = new StreamReader(MEDIADATA);
-
-                while (!mediaReader.EndOfStream)
+                string[] firstSplit = mediaReader.ReadLine().Split('|');
+                if (firstSplit[0] == "BOOK")
                 {
-                    string[] firstSplit = mediaReader.ReadLine().Split('|');
-                    if (firstSplit[0] == "BOOK")
-                    {
 
-                        string secondSplit = mediaReader.ReadLine();
+                    string secondSplit = mediaReader.ReadLine();
 
 
-                        Book br = new Book(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], secondSplit);
+                    Book br = new Book(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], secondSplit);
 
-                        books.Add(br);
-
-                    }
-                    else if (firstSplit[0] == "SONG")
-                    {
-                        Songs sg = new Songs(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], firstSplit[4]);
-
-                        songs.Add(sg);
-                    }
-                    else if (firstSplit[0] == "MOVIE")
-                    {
-                        string secondSplit = mediaReader.ReadLine();
-                        Movie mv = new Movie(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], secondSplit);
-                        movies.Add(mv);
-                    }
+                    books.Add(br);
 
                 }
+                
+                else if (firstSplit[0] == "SONG")
+                {
+                    Songs sg = new Songs(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], firstSplit[4]);
+
+                    songs.Add(sg);
+                }
+                else if (firstSplit[0] == "MOVIE")
+                {
+                    string secondSplit = mediaReader.ReadLine();
+                    Movie mv = new Movie(firstSplit[1], int.Parse(firstSplit[2]), firstSplit[3], secondSplit);
+
+                    movies.Add(mv);
+                }
+
             }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-         
+            mediaReader.Close();
+
         }
+       
 
 
         public static void selectOption()
@@ -157,12 +150,13 @@ namespace Lab3A
             listSongs();
         }
 
+
         public static void searchByTitle(string v)
         {
-           
+
             for (int i = 0; i < books.Count; i++)
             {
-               
+
                 if (books[i].Search(v) == true)
                 {
                     books[i].Decrypt();
@@ -174,13 +168,14 @@ namespace Lab3A
                     medias.Add(songs[i]);
                 }
 
-                if(movies[i].Search(v) == true)
+                if (movies[i].Search(v) == true)
                 {
                     movies[i].Decrypt();
                     medias.Add(movies[i]);
                 }
             }
         }
+
 
     }
 }
