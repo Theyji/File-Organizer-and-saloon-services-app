@@ -14,6 +14,12 @@ namespace Lab3B
     {
         List<Hairdresser> hairdressers = new List<Hairdresser>();
         List<Service> services = new List<Service>();
+        string hairdresserPick;
+        string serviceSelected;
+        int clickCount = 0;
+        string firstSelect;
+        string secondSelect;
+        double price;
 
         public Form_theyji_hair_shop()
         {
@@ -51,6 +57,32 @@ namespace Lab3B
             listBox_selected_services_list.Items.Add(services[3].getType());
             listBox_selected_services_list.Items.Add(services[4].getType());
             listBox_selected_services_list.Items.Add(services[5].getType());
+
+            comboBox_hairdressers.SelectedItem = hairdressers[0].GetFirstname() + " " + hairdressers[0].GetLasname();
+
+        }
+
+        private void button_add_service_Click(object sender, EventArgs e)
+        {
+            clickCount++;
+            hairdresserPick = comboBox_hairdressers.SelectedItem.ToString();
+            serviceSelected = listBox_selected_services_list.SelectedItem.ToString();
+            if (clickCount > 1)
+            {
+                secondSelect = serviceSelected;
+                textBox_charged_items.Text = firstSelect + Environment.NewLine + secondSelect;
+                firstSelect = firstSelect + Environment.NewLine + secondSelect;
+
+            }
+            else
+            {
+                firstSelect = hairdresserPick + Environment.NewLine + serviceSelected;
+                textBox_charged_items.Text = firstSelect;
+
+               
+            }
+
+            comboBox_hairdressers.Enabled = false;
 
         }
     }

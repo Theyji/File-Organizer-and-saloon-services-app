@@ -155,6 +155,7 @@
             this.button_add_service.TabIndex = 6;
             this.button_add_service.Text = "Add Service";
             this.button_add_service.UseVisualStyleBackColor = true;
+            this.button_add_service.Click += new System.EventHandler(this.button_add_service_Click);
             // 
             // button_reset
             // 
