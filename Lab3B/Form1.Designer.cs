@@ -37,7 +37,7 @@
             this.groupBox_price = new System.Windows.Forms.GroupBox();
             this.textBox_price = new System.Windows.Forms.TextBox();
             this.label_total_price = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_totalPrice_display = new System.Windows.Forms.TextBox();
             this.button_add_service = new System.Windows.Forms.Button();
             this.button_reset = new System.Windows.Forms.Button();
             this.button_calculate_total_price = new System.Windows.Forms.Button();
@@ -86,6 +86,7 @@
             this.listBox_selected_services_list.Name = "listBox_selected_services_list";
             this.listBox_selected_services_list.Size = new System.Drawing.Size(333, 283);
             this.listBox_selected_services_list.TabIndex = 0;
+            this.listBox_selected_services_list.SelectedIndexChanged += new System.EventHandler(this.listBox_selected_services_list_SelectedIndexChanged);
             // 
             // groupBox_charged_items
             // 
@@ -113,7 +114,7 @@
             this.groupBox_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox_price.Location = new System.Drawing.Point(1135, 38);
             this.groupBox_price.Name = "groupBox_price";
-            this.groupBox_price.Size = new System.Drawing.Size(228, 307);
+            this.groupBox_price.Size = new System.Drawing.Size(179, 307);
             this.groupBox_price.TabIndex = 3;
             this.groupBox_price.TabStop = false;
             this.groupBox_price.Text = "Price:";
@@ -124,32 +125,32 @@
             this.textBox_price.Multiline = true;
             this.textBox_price.Name = "textBox_price";
             this.textBox_price.ReadOnly = true;
-            this.textBox_price.Size = new System.Drawing.Size(207, 249);
+            this.textBox_price.Size = new System.Drawing.Size(154, 249);
             this.textBox_price.TabIndex = 0;
             // 
             // label_total_price
             // 
             this.label_total_price.AutoSize = true;
             this.label_total_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_total_price.Location = new System.Drawing.Point(1010, 417);
+            this.label_total_price.Location = new System.Drawing.Point(927, 420);
             this.label_total_price.Name = "label_total_price";
             this.label_total_price.Size = new System.Drawing.Size(144, 31);
             this.label_total_price.TabIndex = 4;
             this.label_total_price.Text = "Total Price";
             // 
-            // textBox1
+            // textBox_totalPrice_display
             // 
-            this.textBox1.Location = new System.Drawing.Point(1179, 420);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(184, 31);
-            this.textBox1.TabIndex = 5;
+            this.textBox_totalPrice_display.Location = new System.Drawing.Point(1130, 423);
+            this.textBox_totalPrice_display.Name = "textBox_totalPrice_display";
+            this.textBox_totalPrice_display.ReadOnly = true;
+            this.textBox_totalPrice_display.Size = new System.Drawing.Size(184, 31);
+            this.textBox_totalPrice_display.TabIndex = 5;
             // 
             // button_add_service
             // 
             this.button_add_service.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_add_service.ForeColor = System.Drawing.Color.Green;
-            this.button_add_service.Location = new System.Drawing.Point(127, 552);
+            this.button_add_service.Location = new System.Drawing.Point(58, 562);
             this.button_add_service.Name = "button_add_service";
             this.button_add_service.Size = new System.Drawing.Size(214, 58);
             this.button_add_service.TabIndex = 6;
@@ -161,45 +162,48 @@
             // 
             this.button_reset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_reset.ForeColor = System.Drawing.Color.Orange;
-            this.button_reset.Location = new System.Drawing.Point(859, 552);
+            this.button_reset.Location = new System.Drawing.Point(730, 562);
             this.button_reset.Name = "button_reset";
             this.button_reset.Size = new System.Drawing.Size(197, 58);
             this.button_reset.TabIndex = 7;
             this.button_reset.Text = "Reset";
             this.button_reset.UseVisualStyleBackColor = true;
+            this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
             // 
             // button_calculate_total_price
             // 
             this.button_calculate_total_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_calculate_total_price.ForeColor = System.Drawing.Color.Purple;
-            this.button_calculate_total_price.Location = new System.Drawing.Point(438, 552);
+            this.button_calculate_total_price.Location = new System.Drawing.Point(346, 562);
             this.button_calculate_total_price.Name = "button_calculate_total_price";
             this.button_calculate_total_price.Size = new System.Drawing.Size(299, 58);
             this.button_calculate_total_price.TabIndex = 8;
             this.button_calculate_total_price.Text = "Calculate Total Price";
             this.button_calculate_total_price.UseVisualStyleBackColor = true;
+            this.button_calculate_total_price.Click += new System.EventHandler(this.button_calculate_total_price_Click);
             // 
             // button_exit
             // 
             this.button_exit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.125F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_exit.ForeColor = System.Drawing.Color.Red;
-            this.button_exit.Location = new System.Drawing.Point(1179, 552);
+            this.button_exit.Location = new System.Drawing.Point(1016, 562);
             this.button_exit.Name = "button_exit";
             this.button_exit.Size = new System.Drawing.Size(184, 58);
             this.button_exit.TabIndex = 9;
             this.button_exit.Text = "Exit";
             this.button_exit.UseVisualStyleBackColor = true;
+            this.button_exit.Click += new System.EventHandler(this.button_exit_Click);
             // 
             // Form_theyji_hair_shop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 718);
+            this.ClientSize = new System.Drawing.Size(1501, 718);
             this.Controls.Add(this.button_exit);
             this.Controls.Add(this.button_calculate_total_price);
             this.Controls.Add(this.button_reset);
             this.Controls.Add(this.button_add_service);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBox_totalPrice_display);
             this.Controls.Add(this.label_total_price);
             this.Controls.Add(this.groupBox_price);
             this.Controls.Add(this.groupBox_charged_items);
@@ -230,7 +234,7 @@
         private System.Windows.Forms.GroupBox groupBox_price;
         private System.Windows.Forms.TextBox textBox_price;
         private System.Windows.Forms.Label label_total_price;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_totalPrice_display;
         private System.Windows.Forms.Button button_add_service;
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_calculate_total_price;
